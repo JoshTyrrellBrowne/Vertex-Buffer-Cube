@@ -25,6 +25,7 @@ private:
 	void render();
 	void unload();
 	void checkKeyInput();
+	void updateResultVerts();
 
 	Clock clock;
 	Time elapsed;
