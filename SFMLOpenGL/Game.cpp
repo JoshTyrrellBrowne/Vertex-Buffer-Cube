@@ -39,7 +39,7 @@ typedef struct
 } Vert;
 
 Vert vertex[36];
-Vert displacementVerts[36];
+Vert displacementVerts;
 Vert resultVerts[36];
 GLubyte triangles[36];
 
@@ -53,12 +53,11 @@ void Game::initialize()
 
 	glewInit();
 
-	for (int i = 0; i < 36; i++)
-	{
-		displacementVerts[i].coordinate[0] = 0.1;
-		displacementVerts[i].coordinate[1] = 0.1;
-		displacementVerts[i].coordinate[2] = 0.1;
-	}
+	// initialize
+	displacementVerts.coordinate[0] = 0.1;
+	displacementVerts.coordinate[1] = 0.1;
+	displacementVerts.coordinate[2] = 0.1;
+
 
 	/* Vertices counter-clockwise winding */
 
@@ -555,29 +554,29 @@ void Game::checkKeyInput()
 			/*displacementVectors[i] = displacementVectors[i] + MyVector3(0,0.01,0);*/
 
 			// Matrix Translation way..
-			if (displacementVerts[i].coordinate[2] >= 0)// if z < 0 the translation will be opposite
+			if (displacementVerts.coordinate[2] >= 0)// if z < 0 the translation will be opposite
 			{
-				tempVector.x = displacementVerts[i].coordinate[0];
-				tempVector.y = displacementVerts[i].coordinate[1];
-				tempVector.z = displacementVerts[i].coordinate[2];
+				tempVector.x = displacementVerts.coordinate[0];
+				tempVector.y = displacementVerts.coordinate[1];
+				tempVector.z = displacementVerts.coordinate[2];
 
-				tempVector = MyMatrix3::translation(MyVector3(0, 0.01, 0)) * tempVector;
+				tempVector = MyMatrix3::translation(MyVector3(0, 0.001, 0)) * tempVector;
 
-				displacementVerts[i].coordinate[0] = tempVector.x;
-				displacementVerts[i].coordinate[1] = tempVector.y;
-				displacementVerts[i].coordinate[2] = tempVector.z;
+				displacementVerts.coordinate[0] = tempVector.x;
+				displacementVerts.coordinate[1] = tempVector.y;
+				displacementVerts.coordinate[2] = tempVector.z;
 			}
 			else
 			{
-				tempVector.x = displacementVerts[i].coordinate[0];
-				tempVector.y = displacementVerts[i].coordinate[1];
-				tempVector.z = displacementVerts[i].coordinate[2];
+				tempVector.x = displacementVerts.coordinate[0];
+				tempVector.y = displacementVerts.coordinate[1];
+				tempVector.z = displacementVerts.coordinate[2];
 
-				tempVector = MyMatrix3::translation(MyVector3(0, -0.01, 0)) * tempVector;
+				tempVector = MyMatrix3::translation(MyVector3(0, -0.001, 0)) * tempVector;
 
-				displacementVerts[i].coordinate[0] = tempVector.x;
-				displacementVerts[i].coordinate[1] = tempVector.y;
-				displacementVerts[i].coordinate[2] = tempVector.z;
+				displacementVerts.coordinate[0] = tempVector.x;
+				displacementVerts.coordinate[1] = tempVector.y;
+				displacementVerts.coordinate[2] = tempVector.z;
 			}
 		}
 	}
@@ -585,29 +584,29 @@ void Game::checkKeyInput()
 	{
 		for (int i = 0; i < 36; i++)
 		{
-			if (displacementVerts[i].coordinate[2] >= 0)// if z < 0 the translation will be opposite
+			if (displacementVerts.coordinate[2] >= 0)// if z < 0 the translation will be opposite
 			{
-				tempVector.x = displacementVerts[i].coordinate[0];
-				tempVector.y = displacementVerts[i].coordinate[1];
-				tempVector.z = displacementVerts[i].coordinate[2];
+				tempVector.x = displacementVerts.coordinate[0];
+				tempVector.y = displacementVerts.coordinate[1];
+				tempVector.z = displacementVerts.coordinate[2];
 
-				tempVector = MyMatrix3::translation(MyVector3(0, -0.01, 0)) * tempVector;
+				tempVector = MyMatrix3::translation(MyVector3(0, -0.001, 0)) * tempVector;
 
-				displacementVerts[i].coordinate[0] = tempVector.x;
-				displacementVerts[i].coordinate[1] = tempVector.y;
-				displacementVerts[i].coordinate[2] = tempVector.z;
+				displacementVerts.coordinate[0] = tempVector.x;
+				displacementVerts.coordinate[1] = tempVector.y;
+				displacementVerts.coordinate[2] = tempVector.z;
 			}
 			else
 			{
-				tempVector.x = displacementVerts[i].coordinate[0];
-				tempVector.y = displacementVerts[i].coordinate[1];
-				tempVector.z = displacementVerts[i].coordinate[2];
+				tempVector.x = displacementVerts.coordinate[0];
+				tempVector.y = displacementVerts.coordinate[1];
+				tempVector.z = displacementVerts.coordinate[2];
 
-				tempVector = MyMatrix3::translation(MyVector3(0, 0.01, 0)) * tempVector;
+				tempVector = MyMatrix3::translation(MyVector3(0, 0.001, 0)) * tempVector;
 
-				displacementVerts[i].coordinate[0] = tempVector.x;
-				displacementVerts[i].coordinate[1] = tempVector.y;
-				displacementVerts[i].coordinate[2] = tempVector.z;
+				displacementVerts.coordinate[0] = tempVector.x;
+				displacementVerts.coordinate[1] = tempVector.y;
+				displacementVerts.coordinate[2] = tempVector.z;
 			}
 		}
 	}
@@ -615,29 +614,29 @@ void Game::checkKeyInput()
 	{
 		for (int i = 0; i < 36; i++)
 		{
-			if (displacementVerts[i].coordinate[2] >= 0)// if z < 0 the translation will be opposite
+			if (displacementVerts.coordinate[2] >= 0)// if z < 0 the translation will be opposite
 			{
-				tempVector.x = displacementVerts[i].coordinate[0];
-				tempVector.y = displacementVerts[i].coordinate[1];
-				tempVector.z = displacementVerts[i].coordinate[2];
+				tempVector.x = displacementVerts.coordinate[0];
+				tempVector.y = displacementVerts.coordinate[1];
+				tempVector.z = displacementVerts.coordinate[2];
 
-				tempVector = MyMatrix3::translation(MyVector3(0.01, 0, 0)) * tempVector;
+				tempVector = MyMatrix3::translation(MyVector3(0.001, 0, 0)) * tempVector;
 
-				displacementVerts[i].coordinate[0] = tempVector.x;
-				displacementVerts[i].coordinate[1] = tempVector.y;
-				displacementVerts[i].coordinate[2] = tempVector.z;
+				displacementVerts.coordinate[0] = tempVector.x;
+				displacementVerts.coordinate[1] = tempVector.y;
+				displacementVerts.coordinate[2] = tempVector.z;
 			}
 			else
 			{
-				tempVector.x = displacementVerts[i].coordinate[0];
-				tempVector.y = displacementVerts[i].coordinate[1];
-				tempVector.z = displacementVerts[i].coordinate[2];
+				tempVector.x = displacementVerts.coordinate[0];
+				tempVector.y = displacementVerts.coordinate[1];
+				tempVector.z = displacementVerts.coordinate[2];
 
-				tempVector = MyMatrix3::translation(MyVector3(-0.01, 0, 0)) * tempVector;
+				tempVector = MyMatrix3::translation(MyVector3(-0.001, 0, 0)) * tempVector;
 
-				displacementVerts[i].coordinate[0] = tempVector.x;
-				displacementVerts[i].coordinate[1] = tempVector.y;
-				displacementVerts[i].coordinate[2] = tempVector.z;
+				displacementVerts.coordinate[0] = tempVector.x;
+				displacementVerts.coordinate[1] = tempVector.y;
+				displacementVerts.coordinate[2] = tempVector.z;
 			}
 		}
 	}
@@ -645,29 +644,29 @@ void Game::checkKeyInput()
 	{
 		for (int i = 0; i < 36; i++)
 		{
-			if (displacementVerts[i].coordinate[2] >= 0)// if z < 0 the translation will be opposite
+			if (displacementVerts.coordinate[2] >= 0)// if z < 0 the translation will be opposite
 			{
-				tempVector.x = displacementVerts[i].coordinate[0];
-				tempVector.y = displacementVerts[i].coordinate[1];
-				tempVector.z = displacementVerts[i].coordinate[2];
+				tempVector.x = displacementVerts.coordinate[0];
+				tempVector.y = displacementVerts.coordinate[1];
+				tempVector.z = displacementVerts.coordinate[2];
 
-				tempVector = MyMatrix3::translation(MyVector3(-0.01, 0, 0)) * tempVector;
+				tempVector = MyMatrix3::translation(MyVector3(-0.001, 0, 0)) * tempVector;
 
-				displacementVerts[i].coordinate[0] = tempVector.x;
-				displacementVerts[i].coordinate[1] = tempVector.y;
-				displacementVerts[i].coordinate[2] = tempVector.z;
+				displacementVerts.coordinate[0] = tempVector.x;
+				displacementVerts.coordinate[1] = tempVector.y;
+				displacementVerts.coordinate[2] = tempVector.z;
 			}
 			else
 			{
-				tempVector.x = displacementVerts[i].coordinate[0];
-				tempVector.y = displacementVerts[i].coordinate[1];
-				tempVector.z = displacementVerts[i].coordinate[2];
+				tempVector.x = displacementVerts.coordinate[0];
+				tempVector.y = displacementVerts.coordinate[1];
+				tempVector.z = displacementVerts.coordinate[2];
 
-				tempVector = MyMatrix3::translation(MyVector3(0.01, 0, 0)) * tempVector;
+				tempVector = MyMatrix3::translation(MyVector3(0.001, 0, 0)) * tempVector;
 
-				displacementVerts[i].coordinate[0] = tempVector.x;
-				displacementVerts[i].coordinate[1] = tempVector.y;
-				displacementVerts[i].coordinate[2] = tempVector.z;
+				displacementVerts.coordinate[0] = tempVector.x;
+				displacementVerts.coordinate[1] = tempVector.y;
+				displacementVerts.coordinate[2] = tempVector.z;
 			}
 		}
 	}
@@ -679,9 +678,9 @@ void Game::updateResultVerts()
 	{
 		resultVerts[i] = vertex[i];
 
-		resultVerts[i].coordinate[0] = vertex[i].coordinate[0] + displacementVerts[i].coordinate[0];
-		resultVerts[i].coordinate[1] = vertex[i].coordinate[1] + displacementVerts[i].coordinate[1];
-		resultVerts[i].coordinate[2] = vertex[i].coordinate[2] + displacementVerts[i].coordinate[2];
+		resultVerts[i].coordinate[0] = vertex[i].coordinate[0] + displacementVerts.coordinate[0];
+		resultVerts[i].coordinate[1] = vertex[i].coordinate[1] + displacementVerts.coordinate[1];
+		resultVerts[i].coordinate[2] = vertex[i].coordinate[2] + displacementVerts.coordinate[2];
 	}
 }
 
